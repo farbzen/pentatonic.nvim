@@ -17,7 +17,7 @@ return {
     "writes a valid mono 16-bit PCM header",
     function()
       local bytes = wav.render(440, 0.5)
-      local expected_data_size = math.floor(wav.sample_rate * wav.duration_seconds) * 2
+      local expected_data_size = wav.sample_count() * 2
       assert_equal(bytes:sub(1, 4), "RIFF", "chunk id")
       assert_equal(read_little_endian(bytes, 5, 4), 36 + expected_data_size, "riff size")
       assert_equal(bytes:sub(9, 16), "WAVEfmt ", "format")
@@ -37,6 +37,36 @@ return {
       assert(silent:sub(45):match("^%z+$"), "zero volume produced sound")
       local loud = wav.render(440, 1)
       assert_equal(loud:sub(-2), "\0\0", "last sample")
+    end,
+  },
+  {
+    "fades out smoothly into trailing silence",
+    function()
+      local data = wav.render(1760, 1):sub(45)
+      local function absolute_sample(index)
+        local value = data:byte(index * 2 + 1) + data:byte(index * 2 + 2) * 256
+        return value >= 32768 and 65536 - value or value
+      end
+      local window_size = math.floor(wav.sample_rate * 0.01)
+      local tone_sample_count = wav.tone_sample_count()
+      local previous_window_peak = math.huge
+      for window_start = tone_sample_count - 40 * window_size, tone_sample_count - 1, window_size do
+        local window_peak = 0
+        for index = window_start, math.min(window_start + window_size, tone_sample_count) - 1 do
+          window_peak = math.max(window_peak, absolute_sample(index))
+        end
+        assert(
+          window_peak <= previous_window_peak,
+          ("envelope rises at sample %d: %d > %d"):format(
+            window_start,
+            window_peak,
+            previous_window_peak
+          )
+        )
+        previous_window_peak = window_peak
+      end
+      assert(previous_window_peak <= 1, "tone ends with amplitude " .. previous_window_peak)
+      assert(data:sub(tone_sample_count * 2 + 1):match("^%z+$"), "trailing samples are not silent")
     end,
   },
 }

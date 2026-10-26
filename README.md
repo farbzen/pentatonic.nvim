@@ -49,7 +49,7 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
 ```
 
 > [!TIP]
-> The first keystrokes after the very first start render the samples (about 60 ms in
+> The first keystrokes after the very first start render the samples (about 100 ms in
 > total); afterwards they are read from the cache.
 
 ## Usage
