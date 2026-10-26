@@ -16,12 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Scales `pentatonic` (C D E G A) and `wholetone` (C D E F# G# A#) plus custom
   note lists.
 - Sine samples rendered in pure Lua as WAV files and cached under
-  `stdpath("cache")/magickey`.
+  `stdpath("cache")/pentatonic`.
 - Non-blocking playback via `pw-play`, `paplay`, `aplay` or `afplay`, or a custom
   player command, limited by `max_voices`.
 - Configurable trigger: typed characters only (`insert`, default) or every key
   (`all`).
-- `:Magickey enable|disable|toggle` and `:help magickey`.
+- `:Pentatonic enable|disable|toggle` and `:help pentatonic`.
 
-[Unreleased]: https://github.com/farbzen/magickey.nvim/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/farbzen/magickey.nvim/releases/tag/v0.1.0
+[Unreleased]: https://github.com/farbzen/pentatonic.nvim/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/farbzen/pentatonic.nvim/releases/tag/v0.1.0

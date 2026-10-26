@@ -1,6 +1,6 @@
 <div align="center">
 
-# magickey.nvim
+# pentatonic.nvim
 
 _A harmonic tone for every keystroke in Neovim._
 
@@ -12,14 +12,14 @@ _A harmonic tone for every keystroke in Neovim._
 
 </div>
 
-magickey.nvim turns typing into music: like the `pentatonic` sound of
+pentatonic.nvim turns typing into music: like the `pentatonic` sound of
 [monkeytype](https://monkeytype.com), every keystroke plays a short sine tone from
 a musical scale, so whole sentences sound like a melody instead of clicks.
 
 ## Overview
 
 The plugin is written in pure Lua and needs nothing besides an audio player that is
-already part of most desktops. The code lives in `lua/magickey/`, the user command in
+already part of most desktops. The code lives in `lua/pentatonic/`, the user command in
 `plugin/`.
 
 ## Features
@@ -43,7 +43,7 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
-  "farbzen/magickey.nvim",
+  "farbzen/pentatonic.nvim",
   opts = {},
 }
 ```
@@ -55,7 +55,7 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
 ## Usage
 
 ```lua
-require("magickey").setup({
+require("pentatonic").setup({
   scale = "wholetone",
   trigger = "all",
   volume = 0.3,
@@ -63,11 +63,11 @@ require("magickey").setup({
 ```
 
 ```vim
-:Magickey toggle
+:Pentatonic toggle
 ```
 
 All options are described in [docs/configuration.md](docs/configuration.md) and
-`:help magickey`.
+`:help pentatonic`.
 
 ## Development
 

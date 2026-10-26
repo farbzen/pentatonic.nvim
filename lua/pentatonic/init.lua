@@ -1,18 +1,18 @@
-local player = require("magickey.player")
-local scales = require("magickey.scales")
-local wav = require("magickey.wav")
+local player = require("pentatonic.player")
+local scales = require("pentatonic.scales")
+local wav = require("pentatonic.wav")
 
 local M = {}
 
-local AUGROUP_NAME = "Magickey"
+local AUGROUP_NAME = "Pentatonic"
 local TRIGGERS = { insert = true, all = true }
 
 local defaults = {
   enabled = true,
   trigger = "insert",
   scale = "pentatonic",
-  volume = 0.5,
-  max_voices = 8,
+  volume = 0.15,
+  max_voices = 16,
   player = nil,
   filetypes_exclude = { "TelescopePrompt" },
 }
@@ -20,12 +20,12 @@ local defaults = {
 local config = vim.deepcopy(defaults)
 local note_names = scales.resolve(config.scale)
 local octave_walk = scales.new_walk()
-local on_key_namespace = vim.api.nvim_create_namespace("magickey")
+local on_key_namespace = vim.api.nvim_create_namespace("pentatonic")
 local is_enabled = false
 local missing_player_reported = false
 
 local function cache_directory()
-  return vim.fn.stdpath("cache") .. "/magickey"
+  return vim.fn.stdpath("cache") .. "/pentatonic"
 end
 
 local function sample_path(note_name, octave)
@@ -62,7 +62,7 @@ local function player_command()
   if not command and not missing_player_reported then
     missing_player_reported = true
     vim.notify(
-      "magickey: no audio player found (pw-play, paplay, aplay, afplay); set `player` in setup()",
+      "pentatonic: no audio player found (pw-play, paplay, aplay, afplay); set `player` in setup()",
       vim.log.levels.WARN
     )
   end

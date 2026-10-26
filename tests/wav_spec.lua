@@ -1,4 +1,4 @@
-local wav = require("magickey.wav")
+local wav = require("pentatonic.wav")
 
 local function read_little_endian(bytes, offset, byte_count)
   local value = 0

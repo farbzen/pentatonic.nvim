@@ -1,0 +1,52 @@
+*pentatonic.txt*  Harmonic tone per keystroke
+
+==============================================================================
+CONTENTS                                                 *pentatonic-contents*
+
+  1. Introduction ...................................... |pentatonic-intro|
+  2. Setup ............................................. |pentatonic-setup|
+  3. Commands .......................................... |pentatonic-commands|
+  4. Lua API ........................................... |pentatonic-api|
+
+==============================================================================
+1. INTRODUCTION                                             *pentatonic-intro*
+
+pentatonic.nvim plays a short sine tone from a musical scale on every
+keystroke, modelled on the "pentatonic" sound of monkeytype. Samples are
+rendered once as WAV files and played through an external player (pw-play,
+paplay, aplay or afplay).
+
+Requires Neovim 0.11 or newer.
+
+==============================================================================
+2. SETUP                                                    *pentatonic-setup*
+
+>lua
+  require("pentatonic").setup({
+    enabled = true,
+    trigger = "insert",          -- "insert" or "all"
+    scale = "pentatonic",        -- "pentatonic", "wholetone" or { "C", ... }
+    volume = 0.5,                -- 0 .. 1
+    max_voices = 8,
+    player = nil,                -- e.g. { "paplay" }
+    filetypes_exclude = { "TelescopePrompt" },
+  })
+<
+
+==============================================================================
+3. COMMANDS                                              *pentatonic-commands*
+
+:Pentatonic [enable|disable|toggle]                              *:Pentatonic*
+    Enable, disable or toggle the sounds. Without argument: toggle.
+
+==============================================================================
+4. LUA API                                                    *pentatonic-api*
+
+setup({opts})                                          *pentatonic.setup()*
+enable()                                               *pentatonic.enable()*
+disable()                                              *pentatonic.disable()*
+toggle()                                               *pentatonic.toggle()*
+is_enabled()                                         *pentatonic.is_enabled()*
+play_next_note()                                 *pentatonic.play_next_note()*
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -1,4 +1,4 @@
-local scales = require("magickey.scales")
+local scales = require("pentatonic.scales")
 
 local function sequence_random(values)
   local position = 0

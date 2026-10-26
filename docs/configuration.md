@@ -1,9 +1,9 @@
 # Configuration
 
-All options of `require("magickey").setup()` with their defaults:
+All options of `require("pentatonic").setup()` with their defaults:
 
 ```lua
-require("magickey").setup({
+require("pentatonic").setup({
   enabled = true,
   trigger = "insert",
   scale = "pentatonic",
@@ -34,5 +34,5 @@ long.
 ## Cache
 
 Samples are rendered once per note, octave and volume to
-`stdpath("cache")/magickey/<note><octave>_v<volume>.wav` (e.g. `Fs5_v50.wav`). Deleting
+`stdpath("cache")/pentatonic/<note><octave>_v<volume>.wav` (e.g. `Fs5_v50.wav`). Deleting
 the directory is safe; missing files are rendered again on demand.
