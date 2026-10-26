@@ -28,11 +28,14 @@ require("pentatonic").setup({
 
 Each keystroke plays a random note of the scale. The octave starts at 4 and moves one
 step in its current direction with a probability of 50 %, turning around at octaves 4
-and 6. The tone is a sine wave with an exponential decay (time constant 0.3 s), 1.2 s
-long.
+and 6. The tone is a sine wave with an exponential decay (time constant 0.3 s), 1.6 s
+long; its last 0.4 s fade out along a raised cosine, followed by 30 ms of silence so
+players that clip the end of a buffer only lose silence.
 
 ## Cache
 
 Samples are rendered once per note, octave and volume to
-`stdpath("cache")/pentatonic/<note><octave>_v<volume>.wav` (e.g. `Fs5_v50.wav`). Deleting
-the directory is safe; missing files are rendered again on demand.
+`stdpath("cache")/pentatonic/r<revision>/<note><octave>_v<volume>.wav` (e.g.
+`r2/Fs5_v50.wav`). The revision changes whenever the synthesis changes, so samples are
+rendered again automatically after an update. Deleting the directory is safe; missing
+files are rendered again on demand.

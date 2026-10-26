@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Tones fade out smoothly instead of being cut off: the tone lasts 1.6 s, its last
+  0.4 s fade out along a raised cosine and 30 ms of trailing silence protect the end
+  from players that clip it.
+- Cached samples are stored per synthesis revision (`stdpath("cache")/pentatonic/r2`),
+  so changed sounds are rendered again automatically.
+
 ## [0.1.0] - 2026-10-26
 
 ### Added

@@ -25,7 +25,7 @@ local is_enabled = false
 local missing_player_reported = false
 
 local function cache_directory()
-  return vim.fn.stdpath("cache") .. "/pentatonic"
+  return vim.fn.stdpath("cache") .. "/pentatonic/r" .. wav.revision
 end
 
 local function sample_path(note_name, octave)

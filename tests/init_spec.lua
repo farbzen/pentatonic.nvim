@@ -1,4 +1,5 @@
 local pentatonic = require("pentatonic")
+local wav = require("pentatonic.wav")
 
 local silent_player = { "true" }
 
@@ -60,7 +61,7 @@ return {
     function()
       pentatonic.setup({ player = silent_player, scale = { "A" }, volume = 0.42 })
       pentatonic.play_next_note()
-      local pattern = vim.fn.stdpath("cache") .. "/pentatonic/A?_v42.wav"
+      local pattern = vim.fn.stdpath("cache") .. "/pentatonic/r" .. wav.revision .. "/A?_v42.wav"
       local cached = vim.fn.glob(pattern, false, true)
       assert(#cached >= 1, "no sample cached at " .. pattern)
       pentatonic.disable()
