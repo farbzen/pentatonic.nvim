@@ -3,7 +3,7 @@ if vim.g.loaded_pentatonic then
 end
 vim.g.loaded_pentatonic = true
 
-local subcommands = { "enable", "disable", "toggle" }
+local subcommands = { "enable", "disable", "toggle", "louder", "quieter" }
 
 vim.api.nvim_create_user_command("Pentatonic", function(command)
   local subcommand = command.fargs[1] or "toggle"
@@ -14,7 +14,7 @@ vim.api.nvim_create_user_command("Pentatonic", function(command)
   require("pentatonic")[subcommand]()
 end, {
   nargs = "?",
-  desc = "Enable, disable or toggle pentatonic sounds",
+  desc = "Enable, disable or toggle pentatonic sounds, or make them louder or quieter",
   complete = function(argument_lead)
     return vim.tbl_filter(function(subcommand)
       return vim.startswith(subcommand, argument_lead)
