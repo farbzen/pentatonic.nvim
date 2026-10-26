@@ -29,6 +29,7 @@ already part of most desktops. The code lives in `lua/pentatonic/`, the user com
 - **No dependencies**: samples are synthesized in Lua and cached as WAV files.
 - **Non-blocking**: playback runs in background processes, capped by `max_voices`.
 - **Configurable trigger**: only typed characters, or every key in every mode.
+- **Volume control**: make the tones louder or quieter on the fly.
 
 ## Getting Started
 
@@ -64,6 +65,15 @@ require("pentatonic").setup({
 
 ```vim
 :Pentatonic toggle
+:Pentatonic louder
+:Pentatonic quieter
+```
+
+The plugin sets no key mappings; bind the volume commands yourself if you like:
+
+```lua
+vim.keymap.set("n", "<leader>p+", require("pentatonic").louder, { desc = "Pentatonic louder" })
+vim.keymap.set("n", "<leader>p-", require("pentatonic").quieter, { desc = "Pentatonic quieter" })
 ```
 
 All options are described in [docs/configuration.md](docs/configuration.md) and

@@ -7,8 +7,9 @@ require("pentatonic").setup({
   enabled = true,
   trigger = "insert",
   scale = "pentatonic",
-  volume = 0.5,
-  max_voices = 8,
+  volume = 0.15,
+  volume_step = 0.05,
+  max_voices = 16,
   player = nil,
   filetypes_exclude = { "TelescopePrompt" },
 })
@@ -20,6 +21,7 @@ require("pentatonic").setup({
 | `trigger` | `"insert"` \| `"all"` | `insert` reacts to typed characters (`InsertCharPre`), `all` to every typed key in every mode (`vim.on_key`). |
 | `scale` | string \| string[] | Preset `pentatonic` or `wholetone`, or a list of note names (`C`, `C#`, … `B`). |
 | `volume` | number | Peak amplitude between `0` and `1`. |
+| `volume_step` | number | Step of `:Pentatonic louder` / `quieter` (greater than `0`, at most `1`). Changes last for the current session only. |
 | `max_voices` | integer | Maximum number of simultaneously playing tones; further keystrokes stay silent. |
 | `player` | string[] \| nil | Player command; the sample path is appended. `nil` picks the first available of `pw-play`, `paplay`, `aplay -q`, `afplay`. |
 | `filetypes_exclude` | string[] | Filetypes without sound. Prompt buffers are always excluded. |

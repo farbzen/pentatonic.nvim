@@ -26,8 +26,9 @@ Requires Neovim 0.11 or newer.
     enabled = true,
     trigger = "insert",          -- "insert" or "all"
     scale = "pentatonic",        -- "pentatonic", "wholetone" or { "C", ... }
-    volume = 0.5,                -- 0 .. 1
-    max_voices = 8,
+    volume = 0.15,               -- 0 .. 1
+    volume_step = 0.05,          -- step of :Pentatonic louder/quieter
+    max_voices = 16,
     player = nil,                -- e.g. { "paplay" }
     filetypes_exclude = { "TelescopePrompt" },
   })
@@ -36,8 +37,10 @@ Requires Neovim 0.11 or newer.
 ==============================================================================
 3. COMMANDS                                              *pentatonic-commands*
 
-:Pentatonic [enable|disable|toggle]                              *:Pentatonic*
+:Pentatonic [enable|disable|toggle|louder|quieter]               *:Pentatonic*
     Enable, disable or toggle the sounds. Without argument: toggle.
+    `louder` and `quieter` change the volume by `volume_step` (clamped to
+    0 .. 1) for the current session.
 
 ==============================================================================
 4. LUA API                                                    *pentatonic-api*
@@ -47,6 +50,10 @@ enable()                                               *pentatonic.enable()*
 disable()                                              *pentatonic.disable()*
 toggle()                                               *pentatonic.toggle()*
 is_enabled()                                         *pentatonic.is_enabled()*
+volume()                                                 *pentatonic.volume()*
+set_volume({volume})                                 *pentatonic.set_volume()*
+louder()                                                 *pentatonic.louder()*
+quieter()                                               *pentatonic.quieter()*
 play_next_note()                                 *pentatonic.play_next_note()*
 
  vim:tw=78:ts=8:ft=help:norl:

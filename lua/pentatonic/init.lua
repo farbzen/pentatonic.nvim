@@ -12,6 +12,7 @@ local defaults = {
   trigger = "insert",
   scale = "pentatonic",
   volume = 0.15,
+  volume_step = 0.05,
   max_voices = 16,
   player = nil,
   filetypes_exclude = { "TelescopePrompt" },
@@ -131,6 +132,29 @@ function M.toggle()
   end
 end
 
+function M.volume()
+  return config.volume
+end
+
+function M.set_volume(volume)
+  vim.validate("volume", volume, "number")
+  config.volume = math.floor(math.max(0, math.min(1, volume)) * 100 + 0.5) / 100
+  if is_enabled then
+    vim.schedule(prerender_samples)
+  end
+  local volume_percent = math.floor(config.volume * 100 + 0.5)
+  vim.notify(("pentatonic: volume %d %%"):format(volume_percent), vim.log.levels.INFO)
+  return config.volume
+end
+
+function M.louder()
+  return M.set_volume(config.volume + config.volume_step)
+end
+
+function M.quieter()
+  return M.set_volume(config.volume - config.volume_step)
+end
+
 function M.setup(options)
   options = options or {}
   vim.validate("options", options, "table")
@@ -143,6 +167,9 @@ function M.setup(options)
   vim.validate("volume", merged.volume, function(value)
     return type(value) == "number" and value >= 0 and value <= 1
   end, "number between 0 and 1")
+  vim.validate("volume_step", merged.volume_step, function(value)
+    return type(value) == "number" and value > 0 and value <= 1
+  end, "number greater than 0 and at most 1")
   vim.validate("max_voices", merged.max_voices, function(value)
     return type(value) == "number" and value >= 1
   end, "number >= 1")

@@ -54,6 +54,23 @@ return {
       assert(not pcall(pentatonic.setup, { trigger = "normal" }), "trigger 'normal' accepted")
       assert(not pcall(pentatonic.setup, { scale = "dorian" }), "scale 'dorian' accepted")
       assert(not pcall(pentatonic.setup, { max_voices = 0 }), "max_voices 0 accepted")
+      assert(not pcall(pentatonic.setup, { volume_step = 0 }), "volume_step 0 accepted")
+      assert(not pcall(pentatonic.setup, { volume_step = -0.1 }), "negative volume_step accepted")
+    end,
+  },
+  {
+    "changes the volume by volume_step and clamps it to 0..1",
+    function()
+      local original_notify = vim.notify
+      vim.notify = function() end
+      pentatonic.setup({ enabled = false, volume = 0.15 })
+      assert(pentatonic.louder() == 0.2, "louder from 0.15: " .. pentatonic.volume())
+      assert(pentatonic.quieter() == 0.15, "quieter from 0.2: " .. pentatonic.volume())
+      pentatonic.setup({ enabled = false, volume = 0.98, volume_step = 0.1 })
+      assert(pentatonic.louder() == 1, "louder above 1: " .. pentatonic.volume())
+      pentatonic.set_volume(0.02)
+      assert(pentatonic.quieter() == 0, "quieter below 0: " .. pentatonic.volume())
+      vim.notify = original_notify
     end,
   },
   {

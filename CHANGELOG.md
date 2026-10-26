@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `:Pentatonic louder` and `:Pentatonic quieter` change the volume for the current
+  session by the new option `volume_step` (default `0.05`), clamped to `0`–`1`.
+- Lua API `volume()`, `set_volume()`, `louder()` and `quieter()`.
+
 ### Fixed
 
 - Tones fade out smoothly instead of being cut off: the tone lasts 1.6 s, its last
