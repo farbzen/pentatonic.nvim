@@ -36,11 +36,11 @@ end
 function M.resolve(scale)
   local note_names = type(scale) == "string" and M.presets[scale] or scale
   if type(note_names) ~= "table" or #note_names == 0 then
-    error(("magickey: unknown scale %s"):format(vim.inspect(scale)))
+    error(("pentatonic: unknown scale %s"):format(vim.inspect(scale)))
   end
   for _, name in ipairs(note_names) do
     if not M.is_note_name(name) then
-      error(("magickey: unknown note %s"):format(vim.inspect(name)))
+      error(("pentatonic: unknown note %s"):format(vim.inspect(name)))
     end
   end
   return note_names
