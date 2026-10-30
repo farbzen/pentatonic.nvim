@@ -7,8 +7,9 @@ _A harmonic tone for every keystroke in Neovim._
 [![Version](https://img.shields.io/badge/version-0.1.0-blue?style=flat-square)](CHANGELOG.md)
 [![Neovim](https://img.shields.io/badge/Neovim-0.11%2B-57A143?style=flat-square&logo=neovim)](https://neovim.io)
 [![Lua](https://img.shields.io/badge/Lua-2C2D72?style=flat-square&logo=lua)](https://www.lua.org)
+[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
-[Overview](#overview) • [Getting Started](#getting-started) • [Usage](#usage) • [Development](#development) • [Documentation](#documentation)
+[Overview](#overview) • [Getting Started](#getting-started) • [Usage](#usage) • [Development](#development) • [Documentation](#documentation) • [License](#license)
 
 </div>
 
@@ -94,3 +95,7 @@ format      # stylua
 
 - [Configuration](docs/configuration.md)
 - [Changelog](CHANGELOG.md)
+
+## License
+
+Released under the MIT License, see [LICENSE](LICENSE).
