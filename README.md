@@ -9,7 +9,7 @@ _A harmonic tone for every keystroke in Neovim._
 [![Lua](https://img.shields.io/badge/Lua-2C2D72?style=flat-square&logo=lua)](https://www.lua.org)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
-[Overview](#overview) • [Getting Started](#getting-started) • [Applications](#applications) • [Documentation](#documentation)
+[Overview](#overview) • [Getting Started](#getting-started) • [Applications](#applications) • [Development](#development) • [Documentation](#documentation)
 
 </div>
 
@@ -56,8 +56,6 @@ The repository consists of the following parts:
 git clone git@github.com:farbzen/pentatonic.nvim.git
 cd pentatonic.nvim
 devenv shell
-run-tests   # headless specs
-lint        # stylua --check and selene
 ```
 
 > [!TIP]
@@ -110,10 +108,28 @@ Control it at runtime:
 All options, the sound and the cache are described in
 [docs/configuration.md](docs/configuration.md).
 
+## Development
+
+### Tests
+
+```sh
+run-tests   # nvim --clean -l tests/run.lua, headless with its own cache
+```
+
+### Code quality
+
+```sh
+lint        # stylua --check and selene on lua/, plugin/ and tests/
+format      # stylua on lua/, plugin/ and tests/
+```
+
+Formatting follows `stylua.toml`, linting uses `selene.toml` with the `vim` standard
+library from `vim.yml`. Details are in [docs/development.md](docs/development.md).
+
 ## Documentation
 
 - [Configuration](docs/configuration.md) – all options, sound and cache
-- [Development](docs/development.md) – environment, tests, linting
+- [Development](docs/development.md) – environment, layout, tests, linting
 - `:help pentatonic` – Vim help
 - [Changelog](CHANGELOG.md)
 
