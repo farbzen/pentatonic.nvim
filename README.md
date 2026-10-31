@@ -9,7 +9,7 @@ _A harmonic tone for every keystroke in Neovim._
 [![Lua](https://img.shields.io/badge/Lua-2C2D72?style=flat-square&logo=lua)](https://www.lua.org)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
-[Overview](#overview) • [Features](#features) • [Applications](#applications) • [Documentation](#documentation)
+[Overview](#overview) • [Getting Started](#getting-started) • [Applications](#applications) • [Documentation](#documentation)
 
 </div>
 
@@ -40,13 +40,35 @@ The repository consists of the following parts:
 - **Configurable trigger**: only typed characters, or every key in every mode.
 - **Volume control**: make the tones louder or quieter on the fly.
 
+## Getting Started
+
+### Prerequisites
+
+- [Neovim](https://neovim.io) 0.11 or newer
+- One audio player: `pw-play` (PipeWire), `paplay` (PulseAudio), `aplay` (ALSA) or
+  `afplay` (macOS)
+- [devenv](https://devenv.sh) for development only (provides Neovim, StyLua, selene
+  and lua-language-server)
+
+### Development environment
+
+```sh
+git clone git@github.com:farbzen/pentatonic.nvim.git
+cd pentatonic.nvim
+devenv shell
+run-tests   # headless specs
+lint        # stylua --check and selene
+```
+
+> [!TIP]
+> With [direnv](https://direnv.net) installed, the `.envrc` enters the environment
+> automatically.
+
 ## Applications
 
 ### pentatonic.nvim
 
-The plugin plays a tone for every typed character as soon as `setup()` has run. It
-needs [Neovim](https://neovim.io) 0.11 or newer and one of `pw-play` (PipeWire),
-`paplay` (PulseAudio), `aplay` (ALSA) or `afplay` (macOS).
+The plugin plays a tone for every typed character as soon as `setup()` has run.
 
 Install it with [lazy.nvim](https://github.com/folke/lazy.nvim) and pass options via
 `opts` (or `require("pentatonic").setup({ … })`):
