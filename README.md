@@ -9,7 +9,7 @@ _A harmonic tone for every keystroke in Neovim._
 [![Lua](https://img.shields.io/badge/Lua-2C2D72?style=flat-square&logo=lua)](https://www.lua.org)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
-[Overview](#overview) • [Getting Started](#getting-started) • [Usage](#usage) • [Documentation](#documentation)
+[Overview](#overview) • [Features](#features) • [Applications](#applications) • [Documentation](#documentation)
 
 </div>
 
@@ -40,41 +40,29 @@ The repository consists of the following parts:
 - **Configurable trigger**: only typed characters, or every key in every mode.
 - **Volume control**: make the tones louder or quieter on the fly.
 
-## Getting Started
+## Applications
 
-### Prerequisites
+### pentatonic.nvim
 
-- [Neovim](https://neovim.io) 0.11 or newer
-- One of `pw-play` (PipeWire), `paplay` (PulseAudio), `aplay` (ALSA) or `afplay` (macOS)
+The plugin plays a tone for every typed character as soon as `setup()` has run. It
+needs [Neovim](https://neovim.io) 0.11 or newer and one of `pw-play` (PipeWire),
+`paplay` (PulseAudio), `aplay` (ALSA) or `afplay` (macOS).
 
-### Installation
-
-With [lazy.nvim](https://github.com/folke/lazy.nvim):
+Install it with [lazy.nvim](https://github.com/folke/lazy.nvim) and pass options via
+`opts` (or `require("pentatonic").setup({ … })`):
 
 ```lua
 {
   "farbzen/pentatonic.nvim",
-  opts = {},
+  opts = {
+    scale = "wholetone",
+    trigger = "all",
+    volume = 0.3,
+  },
 }
 ```
 
-> [!TIP]
-> The first keystrokes after the very first start render the samples (about 100 ms in
-> total); afterwards they are read from the cache.
-
-## Usage
-
-Pass options to `setup()` (or `opts` in lazy.nvim):
-
-```lua
-require("pentatonic").setup({
-  scale = "wholetone",
-  trigger = "all",
-  volume = 0.3,
-})
-```
-
-Control the plugin at runtime:
+Control it at runtime:
 
 ```vim
 :Pentatonic           " same as :Pentatonic toggle
@@ -84,13 +72,21 @@ Control the plugin at runtime:
 :Pentatonic quieter
 ```
 
-> [!NOTE]
-> The plugin sets no key mappings, and volume changes last for the current session only.
+> [!TIP]
+> The first keystrokes after the very first start render the samples (about 100 ms in
+> total); afterwards they are read from the cache.
 
-```lua
-vim.keymap.set("n", "<leader>p+", require("pentatonic").louder, { desc = "Pentatonic louder" })
-vim.keymap.set("n", "<leader>p-", require("pentatonic").quieter, { desc = "Pentatonic quieter" })
-```
+> [!NOTE]
+> The plugin sets no key mappings, and volume changes last for the current session
+> only. Map the Lua API yourself if needed:
+>
+> ```lua
+> vim.keymap.set("n", "<leader>p+", require("pentatonic").louder, { desc = "Pentatonic louder" })
+> vim.keymap.set("n", "<leader>p-", require("pentatonic").quieter, { desc = "Pentatonic quieter" })
+> ```
+
+All options, the sound and the cache are described in
+[docs/configuration.md](docs/configuration.md).
 
 ## Documentation
 
