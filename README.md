@@ -9,34 +9,40 @@ _A harmonic tone for every keystroke in Neovim._
 [![Lua](https://img.shields.io/badge/Lua-2C2D72?style=flat-square&logo=lua)](https://www.lua.org)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
-[Overview](#overview) • [Getting Started](#getting-started) • [Applications](#applications) • [Development](#development) • [Documentation](#documentation)
+[Overview](#overview) • [Getting Started](#getting-started) •
+[Documentation](#documentation)
 
 </div>
 
-pentatonic.nvim is a Neovim plugin for everyone who likes the `pentatonic` sound of
-[monkeytype](https://monkeytype.com): every keystroke plays a short sine tone from a
-musical scale, so whole sentences sound like a melody instead of clicks.
+pentatonic.nvim is a Neovim plugin for everyone who likes the `pentatonic` sound
+of [monkeytype](https://monkeytype.com): every keystroke plays a short sine tone
+from a musical scale, so whole sentences sound like a melody instead of clicks.
 
 ## Overview
 
-The plugin is written in pure [Lua](https://www.lua.org) and needs nothing besides an
-audio player that already ships with most desktops. Tones are synthesized once and
-cached as WAV files, playback runs in background processes.
+The plugin is written in pure [Lua](https://www.lua.org) and needs nothing
+besides an audio player that already ships with most desktops. Tones are
+synthesized once and cached as WAV files, playback runs in background processes.
 
 The repository consists of the following parts:
 
 - **Plugin core** – scales, synthesis, sample cache and playback, built with the
-  [Neovim Lua API](https://neovim.io/doc/user/lua.html). The code lives in `lua/pentatonic/`.
-- **User command** – `:Pentatonic` with its subcommands. The code lives in `plugin/`.
+  [Neovim Lua API](https://neovim.io/doc/user/lua.html). The code lives in
+  `lua/pentatonic/`.
+- **User command** – `:Pentatonic` with its subcommands. The code lives in
+  `plugin/`.
 - **Help** – the Vim help file for `:help pentatonic`. It lives in `doc/`.
 - **Tests** – headless specs with a minimal runner. They live in `tests/`.
 
 ## Features
 
-- **Scales**: `pentatonic`, `wholetone` or any custom list of notes always sound harmonic.
-- **Wandering octave**: the pitch drifts between octaves 4 and 6 just like on monkeytype.
+- **Scales**: `pentatonic`, `wholetone` or any custom list of notes always sound
+  harmonic.
+- **Wandering octave**: the pitch drifts between octaves 4 and 6 just like on
+  monkeytype.
 - **No dependencies**: samples are synthesized in Lua and cached as WAV files.
-- **Non-blocking**: playback runs in background processes, capped by `max_voices`.
+- **Non-blocking**: playback runs in background processes, capped by
+  `max_voices`.
 - **Configurable trigger**: only typed characters, or every key in every mode.
 - **Volume control**: make the tones louder or quieter on the fly.
 
@@ -45,31 +51,13 @@ The repository consists of the following parts:
 ### Prerequisites
 
 - [Neovim](https://neovim.io) 0.11 or newer
-- One audio player: `pw-play` (PipeWire), `paplay` (PulseAudio), `aplay` (ALSA) or
-  `afplay` (macOS)
-- [devenv](https://devenv.sh) for development only (provides Neovim, StyLua, selene
-  and lua-language-server)
+- One audio player: `pw-play` (PipeWire), `paplay` (PulseAudio), `aplay` (ALSA)
+  or `afplay` (macOS)
 
-### Development environment
+### Installation
 
-```sh
-git clone git@github.com:farbzen/pentatonic.nvim.git
-cd pentatonic.nvim
-devenv shell
-```
-
-> [!TIP]
-> With [direnv](https://direnv.net) installed, the `.envrc` enters the environment
-> automatically.
-
-## Applications
-
-### pentatonic.nvim
-
-The plugin plays a tone for every typed character as soon as `setup()` has run.
-
-Install it with [lazy.nvim](https://github.com/folke/lazy.nvim) and pass options via
-`opts` (or `require("pentatonic").setup({ … })`):
+Install the plugin with [lazy.nvim](https://github.com/folke/lazy.nvim) and pass
+options via `opts` (or `require("pentatonic").setup({ … })`):
 
 ```lua
 {
@@ -82,7 +70,15 @@ Install it with [lazy.nvim](https://github.com/folke/lazy.nvim) and pass options
 }
 ```
 
-Control it at runtime:
+The plugin plays a tone for every typed character as soon as `setup()` has run.
+
+> [!TIP]
+> The first keystrokes after the very first start render the samples (about
+> 100 ms in total); afterwards they are read from the cache.
+
+### Usage
+
+Control the plugin at runtime:
 
 ```vim
 :Pentatonic           " same as :Pentatonic toggle
@@ -92,44 +88,20 @@ Control it at runtime:
 :Pentatonic quieter
 ```
 
-> [!TIP]
-> The first keystrokes after the very first start render the samples (about 100 ms in
-> total); afterwards they are read from the cache.
-
 > [!NOTE]
-> The plugin sets no key mappings, and volume changes last for the current session
-> only. Map the Lua API yourself if needed:
+> The plugin sets no key mappings, and volume changes last for the current
+> session only. Map the Lua API yourself if needed:
 >
 > ```lua
 > vim.keymap.set("n", "<leader>p+", require("pentatonic").louder, { desc = "Pentatonic louder" })
 > vim.keymap.set("n", "<leader>p-", require("pentatonic").quieter, { desc = "Pentatonic quieter" })
 > ```
 
-All options, the sound and the cache are described in
-[docs/configuration.md](docs/configuration.md).
-
-## Development
-
-### Tests
-
-```sh
-run-tests   # nvim --clean -l tests/run.lua, headless with its own cache
-```
-
-### Code quality
-
-```sh
-lint        # stylua --check and selene on lua/, plugin/ and tests/
-format      # stylua on lua/, plugin/ and tests/
-```
-
-Formatting follows `stylua.toml`, linting uses `selene.toml` with the `vim` standard
-library from `vim.yml`. Details are in [docs/development.md](docs/development.md).
-
 ## Documentation
 
 - [Configuration](docs/configuration.md) – all options, sound and cache
-- [Development](docs/development.md) – environment, layout, tests, linting
+- [Development](docs/development.md) – devenv environment, layout, tests,
+  linting
 - `:help pentatonic` – Vim help
 - [Changelog](CHANGELOG.md)
 
