@@ -9,8 +9,8 @@ _A harmonic tone for every keystroke in Neovim._
 [![Lua](https://img.shields.io/badge/Lua-2C2D72?style=flat-square&logo=lua)](https://www.lua.org)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
-[Overview](#overview) • [Getting Started](#getting-started) •
-[Documentation](#documentation)
+[Overview](#overview) • [Features](#features) •
+[Getting Started](#getting-started) • [Documentation](#documentation)
 
 </div>
 
